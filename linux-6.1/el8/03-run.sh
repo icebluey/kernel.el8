@@ -5,6 +5,22 @@ umask 022
 set -e
 cd "$(dirname "$0")"
 
+# Set back to system openssl 1.1.1
+rm -f /usr/lib64/libcrypto.so.81.3
+rm -f /usr/lib64/libssl.so.81.3
+rm -f /usr/lib64/libcrypto.a
+rm -f /usr/lib64/libssl.a
+rm -fr /usr/include/openssl
+rm -f /usr/lib64/pkgconfig/libcrypto.pc
+rm -f /usr/lib64/pkgconfig/libssl.pc
+rm -f /usr/lib64/pkgconfig/openssl.pc
+rm -f /usr/bin/openssl
+rm -f /usr/lib64/libcrypto.so
+rm -f /usr/lib64/libssl.so
+yum reinstall -y openssl-libs
+yum reinstall -y openssl
+yum reinstall -y openssl-devel
+
 /sbin/ldconfig
 rm -fr ~/rpmbuild
 rm -fr /tmp/make_rpm-pkg.log
