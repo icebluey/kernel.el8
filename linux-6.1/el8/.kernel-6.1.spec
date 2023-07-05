@@ -96,7 +96,6 @@ BuildRequires: asciidoc audit-libs-devel binutils-devel bison flex
 BuildRequires: java-devel libcap-devel newt-devel numactl-devel
 BuildRequires: perl(ExtUtils::Embed) xmlto xz-devel zlib-devel
 BuildRequires: libtraceevent-devel libpfm-devel
-BuildRequires: libbpf-devel
 BuildRequires: libbabeltrace-devel
 %endif
 %if %{with_tools}
@@ -444,7 +443,7 @@ pushd linux-%{KVERREL} > /dev/null
 %endif
 
 %global perf_make \
-    %{__make} -s EXTRA_CFLAGS="${RPM_OPT_FLAGS}" LDFLAGS="%{__global_ldflags}" -C tools/perf V=1 NO_PERF_READ_VDSO32=1 NO_PERF_READ_VDSOX32=1 WERROR=0 NO_LIBUNWIND=1 HAVE_CPLUS_DEMANGLE=1 NO_GTK2=1 NO_STRLCPY=1 NO_BIONIC=1 LIBBPF_DYNAMIC=1 LIBTRACEEVENT_DYNAMIC=1 prefix=%{_prefix} PYTHON=%{__python3}
+    %{__make} -s EXTRA_CFLAGS="${RPM_OPT_FLAGS}" LDFLAGS="%{__global_ldflags}" -C tools/perf V=1 NO_PERF_READ_VDSO32=1 NO_PERF_READ_VDSOX32=1 WERROR=0 NO_LIBUNWIND=1 HAVE_CPLUS_DEMANGLE=1 NO_GTK2=1 NO_STRLCPY=1 NO_BIONIC=1 LIBTRACEEVENT_DYNAMIC=1 prefix=%{_prefix} PYTHON=%{__python3}
 
 %if %{with_perf}
 # Make sure that check-headers.sh is executable.
