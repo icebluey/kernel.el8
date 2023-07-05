@@ -783,7 +783,6 @@ popd > /dev/null
 
 %if %{with_perf}
 %{perf_make} DESTDIR=$RPM_BUILD_ROOT lib=%{_lib} install-bin
-%{perf_make} DESTDIR=$RPM_BUILD_ROOT lib=%{_lib} install-traceevent-plugins
 
 # Remove the trace link.
 %{__rm} -f $RPM_BUILD_ROOT%{_bindir}/trace
@@ -1019,8 +1018,6 @@ fi
 %defattr(-,root,root)
 %{_bindir}/perf
 %{_libdir}/libperf-jvmti.so
-%dir %{_libdir}/traceevent/plugins
-%{_libdir}/traceevent/plugins/*
 %dir %{_libexecdir}/perf-core
 %{_libexecdir}/perf-core/*
 %{_datadir}/perf-core/*
