@@ -16,11 +16,15 @@ jobs:
           sudo apt install -y -qqq bash wget ca-certificates curl git ; 
           sudo ln -svf bash /bin/sh ; 
           sudo bash docker/.pre ; 
-          sudo apt upgrade -fy -qqq ;
           sudo bash docker/install_docker.sh
 
       - name: Build kernel 6.1 el8
         run: |
+          echo
+          sudo df -h
+          echo
+          sudo lsblk
+          echo
           sudo bash linux-6.1/run-build-el8.sh
           sudo systemctl stop docker.socket docker.service containerd.service
           sudo rm -fr /var/lib/docker/*
