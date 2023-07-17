@@ -4,6 +4,7 @@ TZ='UTC'; export TZ
 umask 022
 set -e
 cd "$(dirname "$0")"
+bash 00-update_linux-firmware.sh
 bash 99-clean.sh
 bash 01-dl-linux-X.Y.sh "6.1"
 bash 02-setup.sh
