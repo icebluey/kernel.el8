@@ -28,6 +28,9 @@ jobs:
           sudo docker info
           echo
           sudo bash linux-6.1/run-build-el8.sh
+          echo
+          sudo df -h
+          echo
           sudo systemctl stop docker.socket docker.service containerd.service
           sudo rm -fr /var/lib/docker/*
       - name: Upload kernel 6.1 el8
