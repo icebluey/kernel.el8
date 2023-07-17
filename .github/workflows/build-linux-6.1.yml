@@ -25,6 +25,8 @@ jobs:
           echo
           sudo lsblk
           echo
+          sudo docker info
+          echo
           sudo bash linux-6.1/run-build-el8.sh
           sudo systemctl stop docker.socket docker.service containerd.service
           sudo rm -fr /var/lib/docker/*
