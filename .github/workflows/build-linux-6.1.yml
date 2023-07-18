@@ -115,6 +115,7 @@ jobs:
           echo
           sudo systemctl stop docker.socket docker.service containerd.service
           sudo rm -fr /var/lib/docker/*
+
       - name: Upload kernel 6.1 el8
         run: |
           _repo="$(echo ${{ github.repository }} | awk -F '/' '{print $2}')"
