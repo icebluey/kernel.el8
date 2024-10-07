@@ -69,11 +69,19 @@ echo '{
     "storage-driver": "overlay2",
     "data-root": "/mnt/docker-data"
 }' > /etc/docker/daemon.json
-
 /bin/rm -fr /mnt/docker-data
 sleep 2
 mkdir /mnt/docker-data
 systemctl start containerd.service >/dev/null 2>&1 || :
 sleep 2
 systemctl start docker.service >/dev/null 2>&1 || :
+sleep 2
+echo
+echo '/mnt/'
+/bin/ls -laF /mnt/
+echo
+echo '/mnt/docker-data/'
+/bin/ls -laF /mnt/docker-data/
+echo
+du -h /mnt/
 exit
