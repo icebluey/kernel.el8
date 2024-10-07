@@ -29,7 +29,8 @@ jobs:
           sudo df -h
           echo
           sudo systemctl stop docker.socket docker.service containerd.service
-          sudo rm -fr /var/lib/docker/*
+          sudo rm -fr /var/lib/docker/* || true 
+          sudo rm -fr /mnt/docker-data/* || true 
 
       - name: Upload kernel 6.6 el8
         run: |
