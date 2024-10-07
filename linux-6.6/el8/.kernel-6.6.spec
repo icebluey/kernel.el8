@@ -1070,8 +1070,7 @@ fi
 %{_mandir}/man8/x86_energy_perf_policy*
 
 %files -n %{name}-tools-libs
-%{_libdir}/libcpupower.so.0
-%{_libdir}/libcpupower.so.0.0.1
+%{_libdir}/libcpupower.so*
 
 %files -n %{name}-tools-libs-devel
 %{_libdir}/libcpupower.so
