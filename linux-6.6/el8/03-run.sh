@@ -4,6 +4,10 @@ TZ='UTC'; export TZ
 umask 022
 set -e
 cd "$(dirname "$0")"
+yum makecache
+yum install -y openssl-libs || true 
+yum install -y openssl || true 
+yum install -y openssl-devel || true 
 
 # Set back to system openssl 1.1.1
 rm -f /usr/lib64/libcrypto.so.81.3
@@ -17,9 +21,9 @@ rm -f /usr/lib64/pkgconfig/openssl.pc
 rm -f /usr/bin/openssl
 rm -f /usr/lib64/libcrypto.so
 rm -f /usr/lib64/libssl.so
-yum reinstall -y openssl-libs
-yum reinstall -y openssl
-yum reinstall -y openssl-devel
+yum reinstall -y openssl-libs || true 
+yum reinstall -y openssl || true 
+yum reinstall -y openssl-devel || true 
 
 /sbin/ldconfig
 rm -fr ~/rpmbuild
