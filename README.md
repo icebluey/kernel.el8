@@ -7,3 +7,11 @@ enabled = 1
 gpgcheck = 0
 proxy=_none_
 ```
+
+```
+cp -vf ../.config .config
+make -s ARCH=x86_64 listnewconfig | grep -E '^CONFIG_'
+
+make ARCH=x86_64 oldconfig
+
+```
