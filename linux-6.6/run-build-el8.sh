@@ -10,6 +10,7 @@ docker run --cpus="2.0" --hostname 'x86-040.build.eng.bos.redhat.com' --rm --nam
 sleep 2
 docker exec al8 yum clean all
 docker exec al8 yum makecache
+docker exec al8 yum update -y
 docker exec al8 /bin/bash -c 'rm -fr /tmp/*'
 docker cp el8 al8:/home/
 docker exec al8 /bin/bash /home/el8/00-run-all.sh
