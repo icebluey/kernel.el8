@@ -58,6 +58,21 @@ cd /tmp
 rm -fr "${_tmp_dir}"
 bash /etc/containerd/.install.txt
 bash /etc/docker/.install.txt
+
+echo '{
+    "dns": [
+        "8.8.8.8"
+    ],
+    "exec-opts": [
+        "native.cgroupdriver=systemd"
+    ],
+    "storage-driver": "overlay2",
+    "data-root": "/mnt/docker-data"
+}' > /etc/docker/daemon.json
+
+/bin/rm -fr /mnt/docker-data
+sleep 2
+mkdir /mnt/docker-data
 systemctl start containerd.service >/dev/null 2>&1 || :
 sleep 2
 systemctl start docker.service >/dev/null 2>&1 || :
