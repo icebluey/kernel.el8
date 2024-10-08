@@ -1070,7 +1070,8 @@ fi
 %{_mandir}/man8/x86_energy_perf_policy*
 
 %files -n %{name}-tools-libs
-%{_libdir}/libcpupower.so*
+%{_libdir}/libcpupower.so.1
+%{_libdir}/libcpupower.so.0.0.1
 
 %files -n %{name}-tools-libs-devel
 %{_libdir}/libcpupower.so
@@ -1144,4 +1145,3 @@ fi
 %{nil}
 
 %kernel_variant_files %{with_vdso_install} %{with_default}
-
