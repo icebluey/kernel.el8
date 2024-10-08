@@ -10,6 +10,6 @@ bash 01-dl-linux-X.Y.sh "6.6"
 bash 02-setup.sh
 bash 03-run.sh || tail -n 500 /tmp/make_rpm-pkg.log
 echo ; grep '^CONFIG_' /tmp/make_rpm-pkg.log || : ; echo
-tail -n 7 /tmp/make_rpm-pkg.log
+tail -n 100 /tmp/make_rpm-pkg.log
 bash 04-copy.sh
 exit
