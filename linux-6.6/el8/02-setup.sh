@@ -32,29 +32,30 @@ sed 's|^NoSource:|#NoSource:|g' -i "${_kernel_spec_file}"
 sed -e '/^%changelog/,$d' -i "${_kernel_spec_file}"
 echo '%changelog' >> "${_kernel_spec_file}"
 
-#if [[ "${_patch}" > 0 ]]; then
-#    for (( i = "${_patch}"; i >= 0; i-- )); do
-#        if [[ ${i} == 0 ]]; then
-#            _changelog_date="$(wget -qO- "https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}" | head -n 4 | grep -i '^Date:' | sed 's/^Date://g' | sed "s/^[ \t]*//" | awk '{print $1,$2,$3,$5}')"
-#            _changelog_author="$(wget -qO- "https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}" | head -n 4 | grep -i '^Author:' | sed 's/^Author://g' | sed "s/^[ \t]*//")"
-#            echo "* ${_changelog_date} ${_changelog_author} - ${_major}.${_minor}" >> "${_kernel_spec_file}"
-#            echo "- Updated with the ${_major}.${_minor} source tarball." >> "${_kernel_spec_file}"
-#            echo "- [https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}]" >> "${_kernel_spec_file}"
-#        else
-#            _changelog_date="$(wget -qO- "https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}.${i}" | head -n 4 | grep -i '^Date:' | sed 's/^Date://g' | sed "s/^[ \t]*//" | awk '{print $1,$2,$3,$5}')"
-#            _changelog_author="$(wget -qO- "https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}.${i}" | head -n 4 | grep -i '^Author:' | sed 's/^Author://g' | sed "s/^[ \t]*//")"            
-#            echo "* ${_changelog_date} ${_changelog_author} - ${_major}.${_minor}.${i}" >> "${_kernel_spec_file}"
-#            echo "- Updated with the ${_major}.${_minor}.${i} source tarball." >> "${_kernel_spec_file}"
-#            echo "- [https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}.${i}]" >> "${_kernel_spec_file}"
-#        fi
-#    done
-#elif [[ "${_patch}" == "0" ]]; then
-#    _changelog_date="$(wget -qO- "https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}" | head -n 4 | grep -i '^Date:' | sed 's/^Date://g' | sed "s/^[ \t]*//" | awk '{print $1,$2,$3,$5}')"
-#    _changelog_author="$(wget -qO- "https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}" | head -n 4 | grep -i '^Author:' | sed 's/^Author://g' | sed "s/^[ \t]*//")"
-#    echo "* ${_changelog_date} ${_changelog_author} - ${_major}.${_minor}" >> "${_kernel_spec_file}"
-#    echo "- Updated with the ${_major}.${_minor} source tarball." >> "${_kernel_spec_file}"
-#    echo "- [https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}]" >> "${_kernel_spec_file}"
-#fi
+if [[ "${_patch}" > 0 ]]; then
+    for (( i = "${_patch}"; i >= 0; i-- )); do
+        if [[ ${i} == 0 ]]; then
+            _changelog_date="$(wget -qO- "https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}" | head -n 4 | grep -i '^Date:' | sed 's/^Date://g' | sed "s/^[ \t]*//" | awk '{print $1,$2,$3,$5}')"
+            _changelog_author="$(wget -qO- "https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}" | head -n 4 | grep -i '^Author:' | sed 's/^Author://g' | sed "s/^[ \t]*//")"
+            echo "* ${_changelog_date} ${_changelog_author} - ${_major}.${_minor}" >> "${_kernel_spec_file}"
+            echo "- Updated with the ${_major}.${_minor} source tarball." >> "${_kernel_spec_file}"
+            echo "- [https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}]" >> "${_kernel_spec_file}"
+        else
+            _changelog_date="$(wget -qO- "https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}.${i}" | head -n 4 | grep -i '^Date:' | sed 's/^Date://g' | sed "s/^[ \t]*//" | awk '{print $1,$2,$3,$5}')"
+            _changelog_author="$(wget -qO- "https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}.${i}" | head -n 4 | grep -i '^Author:' | sed 's/^Author://g' | sed "s/^[ \t]*//")"            
+            echo "* ${_changelog_date} ${_changelog_author} - ${_major}.${_minor}.${i}" >> "${_kernel_spec_file}"
+            echo "- Updated with the ${_major}.${_minor}.${i} source tarball." >> "${_kernel_spec_file}"
+            echo "- [https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}.${i}]" >> "${_kernel_spec_file}"
+            echo >> "${_kernel_spec_file}"
+        fi
+    done
+elif [[ "${_patch}" == "0" ]]; then
+    _changelog_date="$(wget -qO- "https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}" | head -n 4 | grep -i '^Date:' | sed 's/^Date://g' | sed "s/^[ \t]*//" | awk '{print $1,$2,$3,$5}')"
+    _changelog_author="$(wget -qO- "https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}" | head -n 4 | grep -i '^Author:' | sed 's/^Author://g' | sed "s/^[ \t]*//")"
+    echo "* ${_changelog_date} ${_changelog_author} - ${_major}.${_minor}" >> "${_kernel_spec_file}"
+    echo "- Updated with the ${_major}.${_minor} source tarball." >> "${_kernel_spec_file}"
+    echo "- [https://www.kernel.org/pub/linux/kernel/v${_major}.x/ChangeLog-${_major}.${_minor}]" >> "${_kernel_spec_file}"
+fi
 
 echo >> "${_kernel_spec_file}"
 
